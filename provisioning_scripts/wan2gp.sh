@@ -7,6 +7,7 @@ set -euo pipefail
 apt-get install -y \
     libasound2-dev \
     pulseaudio-utils \
+    wget \
     --no-install-recommends
 
 cd "$WORKSPACE"
@@ -36,7 +37,7 @@ echo "Starting Wan2GP"
 cd "${WORKSPACE}/Wan2GP"
 export XDG_RUNTIME_DIR=/tmp
 export SDL_AUDIODRIVER=dummy
-python wgp.py 2>&1
+python wgp.py --compile --attention sage2 --profile 3 --preload 2000 2>&1
 
 EOL
 
