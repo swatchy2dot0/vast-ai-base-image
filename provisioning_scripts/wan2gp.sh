@@ -20,7 +20,11 @@ uv pip install -r requirements.txt
 
 wget -P ./loras https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_CausVid_14B_T2V_lora_rank32.safetensors
 
-# Create Wan2GP startup scripts
+echo download done
+
+ls ./loras -rtl
+
+echo Create Wan2GP startup scripts
 cat > /opt/supervisor-scripts/wan2gp.sh << 'EOL'
 #!/bin/bash
 
@@ -45,7 +49,7 @@ EOL
 
 chmod +x /opt/supervisor-scripts/wan2gp.sh
 
-# Generate the supervisor config files
+echo Generate the supervisor config files
 cat > /etc/supervisor/conf.d/wan2gp.conf << 'EOL'
 [program:wan2gp]
 environment=PROC_NAME="%(program_name)s"
@@ -69,3 +73,5 @@ EOL
 # Update supervisor to start the new service
 supervisorctl reread
 supervisorctl update
+
+echo provisioning done
