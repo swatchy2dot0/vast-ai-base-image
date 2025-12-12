@@ -18,6 +18,9 @@ cd Wan2GP
 uv pip install torch==${TORCH_VERSION:-2.8.0} torchvision torchaudio --torch-backend=auto
 uv pip install -r requirements.txt
 
+echo current directory is
+pwd
+
 wget -P ./loras https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_CausVid_14B_T2V_lora_rank32.safetensors
 
 echo download done
