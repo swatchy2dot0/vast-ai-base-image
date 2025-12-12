@@ -23,9 +23,14 @@ pwd
 
 wget -P ./loras https://huggingface.co/Kijai/WanVideo_comfy/blob/main/Wan21_CausVid_14B_T2V_lora_rank32.safetensors
 
+wget -P ./loras https://huggingface.co/DeepBeepMeep/Wan2.2/resolve/main/wan2.2_animate_relighting_lora.safetensors
+
+wget -P ./ckpts https://huggingface.co/DeepBeepMeep/Wan2.2/resolve/main/wan2.2_animate_14B_quanto_bf16_int8.safetensors
+
 echo download done
 
 ls ./loras -rtl
+ls ./ckpts -rtl
 
 echo Create Wan2GP startup scripts
 cat > /opt/supervisor-scripts/wan2gp.sh << 'EOL'
@@ -46,7 +51,7 @@ echo "Starting Wan2GP"
 cd "${WORKSPACE}/Wan2GP"
 export XDG_RUNTIME_DIR=/tmp
 export SDL_AUDIODRIVER=dummy
-python wgp.py --compile --attention sage2 --profile 3 --preload 2000 2>&1
+python wgp.py --profile 3 2>&1
 
 EOL
 
